@@ -1,0 +1,91 @@
+{% extends 'base.html' %} {% load static %} {% block content %}
+
+<div
+  style="
+    background-image: url(../../static/assets/bg-sgh.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+  "
+>
+  <nav
+    class="navbar navbar-expand-lg border-0 shadow-lg"
+    style="background-color: #89bfb6"
+  >
+    <div class="container-fluid align-items-center">
+      <a href="#" class="navbar-brand text-black">
+        <h1>Recepción</h1>
+      </a>
+      <a href="{% url 'login' %}" class="navbar-brand text-black">
+        <p class="m-0">Salir</p>
+      </a>
+    </div>
+  </nav>
+
+  <section>
+    <div class="d-flex gap-5 justify-content-center mt-5">
+      <a href="/reservation-form.html" style="text-decoration: none">
+        <div style="width: 350px; height: 200" class="shadow-sm">
+          <div
+            style="
+              background-color: #7ce873;
+              height: 55px;
+              border-radius: 10px 10px 0 0;
+            "
+            class="d-flex justify-content-center align-items-center"
+          >
+            <h2>CREAR</h2>
+          </div>
+          <div
+            style="
+              background-color: #81d17a;
+              height: 145px;
+              border-radius: 0 0 10px 10px;
+            "
+            class="d-flex justify-content-center align-items-center text-white"
+          >
+            <h3>RESERVACION</h3>
+          </div>
+        </div>
+      </a>
+
+      <div style="width: 350px; height: 200" class="shadow-sm">
+        <div
+          style="
+            background-color: #fe9950;
+            height: 55px;
+            border-radius: 10px 10px 0 0;
+          "
+          class="d-flex justify-content-center align-items-center"
+        >
+          <h2>LISTAR</h2>
+        </div>
+        <div
+          style="
+            background-color: #f0904b;
+            height: 145px;
+            border-radius: 0 0 10px 10px;
+          "
+          class="d-flex justify-content-center align-items-center text-white"
+        >
+          <h3>RESERVACIONES</h3>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- <section
+      class="d-flex align-items-center justify-content-center"
+      style="height: 100vh"
+    >
+      <div
+        class="d-flex flex-column align-items-center p-5 gap-3 rounded form-bg-container"
+      >
+        <h1>Acceder al sistema como</h1>
+        <button class="btn btn-primary w-100">Administrador</button>
+        <button class="btn btn-primary w-100">Recepcionista</button>
+      </div>
+    </section> -->
+</div>
+
+{% endblock content %}
