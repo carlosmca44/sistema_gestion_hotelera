@@ -5,3 +5,27 @@
 .btn-primary {
   background-color: #fdd95b !important;
 }
+
+.gbutton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-image: linear-gradient(to right, #aadfef, #33a9ce);
+  border-radius: 50px;
+  font-weight: 700;
+  color: black;
+  padding: 12px 15px;
+  transition: all 0.4s;
+}
+
+.gbutton:hover {
+  box-shadow: #2894b5 3px 3px 10px;
+  transition: all 0.25s;
+  color: white;
+}
+
+.flex-column-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
