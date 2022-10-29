@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from .forms import LoginAuth, SignInAuth
+from .models import *
 
 
 def auth_login(request):
