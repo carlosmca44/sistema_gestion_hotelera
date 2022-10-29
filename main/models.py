@@ -2,11 +2,11 @@ from django.db import models
 
 
 class Habitacion(models.Model):
-    roomNumber = models.IntegerField()
-    dispo = models.BooleanField()
+    roomNumber = models.IntegerField(primary_key=True)
+    dispo = models.BooleanField(default=True)
 
     def __str__(self):
-        return self.roomNumber
+        return self.roomNumber.__str__()
 
 
 class Usuario(models.Model):

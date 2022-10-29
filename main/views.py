@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .forms import LoginAuth, SignInAuth
+from .forms import LoginAuth, SignInAuth, ReservationForm
 from .models import *
 
 
@@ -28,4 +28,19 @@ def auth_signin(request):
 
 
 def home(request):
-    return render(request, 'home/home.html')
+    names = Reservacion.objects.all()
+    context = {'names': names}
+    return render(request, 'home/home.html', context)
+
+
+def createReservation(request):
+    if request.method == 'POST':
+        form = ReservationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('home')
+    else:
+        form = ReservationForm()
+
+    context = {'form': form}
+    return render(request, 'reservations/reservation_form.html', context)
