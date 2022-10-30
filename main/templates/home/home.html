@@ -76,7 +76,10 @@
                 style="width: 100%"
                 >Eliminar</a
               >
-              <a href="" class="btn btn-danger" style="width: 100%"
+              <a
+                href="{% url 'editReservation' reservation.id %}"
+                class="btn btn-danger"
+                style="width: 100%"
                 >Editar</a
               >
             </div>

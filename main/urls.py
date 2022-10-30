@@ -6,6 +6,8 @@ urlpatterns = [
     path('signin/', views.auth_signin, name='signin'),
     path('home/', views.home, name='home'),
     path('reservation/new', views.createReservation, name='newReservation'),
-    path("deleteReservation/<int:reservationId>/",
+    path('reservation/delete/<int:reservationId>/',
          views.deleteReservation, name="deleteReservation"),
+    path('reservation/edit/<int:reservationId>',
+         views.editReservation, name='editReservation')
 ]
