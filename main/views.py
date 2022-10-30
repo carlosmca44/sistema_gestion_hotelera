@@ -29,7 +29,9 @@ def auth_signin(request):
 
 def home(request):
     names = Reservacion.objects.all()
-    context = {'names': names}
+    totalR = Reservacion.objects.count()
+    disp = 100 - totalR
+    context = {'names': names, 'total': totalR, 'disp': disp}
     return render(request, 'home/home.html', context)
 
 
@@ -44,3 +46,9 @@ def createReservation(request):
 
     context = {'form': form}
     return render(request, 'reservations/reservation_form.html', context)
+
+
+def deleteReservation(request, reservationId):
+    reservation = Reservacion.objects.get(id=reservationId)
+    reservation.delete()
+    return redirect('home')
