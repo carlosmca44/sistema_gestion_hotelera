@@ -85,3 +85,17 @@ def createCSuggestion(request):
 
     context = {'form': form}
     return render(request, 'complaint_suggestions/csuggestions_form.html', context)
+
+
+def editCSuggestion(request, csuggestionId):
+    csuggestion = QSugerencias.objects.get(id=csuggestionId)
+    if request.method == 'POST':
+        form = CSuggestionsForm(request.POST, instance=csuggestion)
+        if form.is_valid():
+            form.save()
+            return redirect('csuggestions')
+    else:
+        form = CSuggestionsForm(instance=csuggestion)
+
+    context = {'form': form}
+    return render(request, 'complaint_suggestions/csuggestion_edit.html', context)

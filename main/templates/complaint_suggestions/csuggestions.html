@@ -9,57 +9,44 @@
       >Nueva queja o sugerencia</a
     >
   </div>
-  {% comment %}
   <section class="container my-5 w-100 w-md-75">
-    <h2 class="fw-bold">Reservaciones</h2>
     <div class="d-flex">
-      <p class="fw-bold col-4">Nombre</p>
-      <p class="fw-bold col-3 text-center">Fecha de entrada</p>
-      <p class="fw-bold col-3 text-center">Fecha de salida</p>
+      <p class="fw-bold col-4">A nombre de:</p>
       <p class="fw-bold col-1 text-center">Habitacion</p>
+      <p class="fw-bold col-3 text-center">Queja o sugerencia</p>
     </div>
     <div class="accordion" id="accordionExample">
-      {% for reservation in names %}
+      {% for csdata in cs %}
       <div class="accordion-item">
-        <h2 class="accordion-header" id="heading{{reservation.id}}">
+        <h2 class="accordion-header" id="heading{{csdata.id}}">
           <button
             class="accordion-button"
             type="button"
             data-bs-toggle="collapse"
-            data-bs-target="#collapse{{reservation.id}}"
+            data-bs-target="#collapse{{csdata.id}}"
             aria-expanded="true"
-            aria-controls="collapse{{reservation.id}}"
+            aria-controls="collapse{{csdata.id}}"
           >
             <div class="col-4">
-              {{reservation.name}} {{reservation.lastName}}
+              {{csdata.name}} {{csdata.lastName}}
             </div>
-            <div class="col-3 text-center">
-              {{reservation.entry_date}}
-            </div>
-            <div class="col-3 text-center">
-              {{reservation.out_date}}
-            </div>
-            <div class="col-1 text-center">
-              {{reservation.roomNumber}}
-            </div>
+            <div class="col-1 text-center">{{csdata.roomNumber}}</div>
+            <div class="col-3 text-center">{{csdata.info}}</div>
           </button>
         </h2>
         <div
-          id="collapse{{reservation.id}}"
+          id="collapse{{csdata.id}}"
           class="accordion-collapse collapse"
           aria-labelledby="heading{{reservation.id}}"
           data-bs-parent="#accordionExample"
         >
           <div class="accordion-body">
             <div class="w-100 d-flex gap-5">
-              <a
-                href="{% url 'deleteReservation' reservation.id %}"
-                class="btn btn-primary"
-                style="width: 100%"
+              <a href="" class="btn btn-primary" style="width: 100%"
                 >Eliminar</a
               >
               <a
-                href="{% url 'editReservation' reservation.id %}"
+                href="{% url 'editCSuggestion' csdata.id %}"
                 class="btn btn-danger"
                 style="width: 100%"
                 >Editar</a
@@ -71,7 +58,6 @@
       {% endfor %}
     </div>
   </section>
-  {% endcomment %}
 </section>
 
 {% endblock content %}

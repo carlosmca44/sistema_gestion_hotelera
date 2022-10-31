@@ -12,4 +12,6 @@ urlpatterns = [
          views.editReservation, name='editReservation'),
     path('csuggestion/', views.complaintSuggestion, name='csuggestions'),
     path('csuggestion/new', views.createCSuggestion, name='newCSuggestion'),
+    path('csuggestion/edit/<int:csuggestionId>',
+         views.editCSuggestion, name='editCSuggestion'),
 ]
