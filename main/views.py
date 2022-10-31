@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .forms import LoginAuth, SignInAuth, ReservationForm
+from .forms import *
 from .models import *
 
 
@@ -66,3 +66,22 @@ def editReservation(request, reservationId):
 
     context = {'form': form}
     return render(request, 'reservations/edit_reservation.html', context)
+
+
+def complaintSuggestion(request):
+    cs = QSugerencias.objects.all()
+    context = {'cs': cs}
+    return render(request, 'complaint_suggestions/csuggestions.html', context)
+
+
+def createCSuggestion(request):
+    if request.method == 'POST':
+        form = CSuggestionsForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('csuggestions')
+    else:
+        form = CSuggestionsForm()
+
+    context = {'form': form}
+    return render(request, 'complaint_suggestions/csuggestions_form.html', context)

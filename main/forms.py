@@ -27,3 +27,17 @@ class ReservationForm(forms.ModelForm):
             'out_date': forms.DateInput(attrs={'type': 'date', 'class': 'form-control'}, format='%d/%m/%Y'),
             'roomNumber': forms.Select(attrs={'class': 'form-select'}),
         }
+
+
+class CSuggestionsForm(forms.ModelForm):
+    class Meta:
+        model = QSugerencias
+        fields = ['name', 'roomNumber', 'info']
+        labels = {
+            'name': 'A nombre de:', 'roomNumber': 'Habitacion', 'info': 'Informacion'
+        }
+        widgets = {
+            'name': forms.Select(attrs={'class': 'form-control'}),
+            'roomNumber': forms.Select(attrs={'class': 'form-select'}),
+            'info': forms.Textarea(attrs={'class': 'form-control'}),
+        }

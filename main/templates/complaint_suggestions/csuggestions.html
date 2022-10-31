@@ -1,42 +1,15 @@
 {% extends 'base.html' %} {% load static %} {% block content %}
 
-<div style="height: 100vh">
-  <section>
-    <div class="d-flex gap-5 justify-content-center mt-5">
-      <div class="flex-column-center">
-        <p class="d-flex align-items-center gap-3 fw-bold">
-          Reservaciones actuales: {{total}}
-          <i class="fa-solid fa-calendar-check fa-lg"></i>
-        </p>
-        <a
-          href="{% url 'newReservation' %}"
-          class="text-decoration-none gbutton"
-          >Nueva Reservacion</a
-        >
-      </div>
-      <div class="flex-column-center">
-        <p class="d-flex align-items-center gap-3 fw-bold">
-          Disponibilidad: {{disp}}
-          <i class="fa-solid fa-house fa-lg"></i>
-        </p>
-        <a href="" class="text-decoration-none gbutton"
-          >Habitaciones Disponibles</a
-        >
-      </div>
-      <div class="flex-column-center">
-        <p class="d-flex align-items-center gap-3 fw-bold">
-          Total QyS: 7
-          <i class="fa-solid fa-house-circle-exclamation fa-lg"></i>
-        </p>
-        <a
-          href="{% url 'csuggestions' %}"
-          class="text-decoration-none gbutton"
-          >Quejas y Sugerencias</a
-        >
-      </div>
-    </div>
-  </section>
-
+<section class="container pt-4">
+  <div class="d-flex justify-content-between">
+    <h2 class="fw-bold">Quejas y sugerencias</h2>
+    <a
+      href="{% url 'newCSuggestion' %}"
+      class="text-decoration-none gbutton"
+      >Nueva queja o sugerencia</a
+    >
+  </div>
+  {% comment %}
   <section class="container my-5 w-100 w-md-75">
     <h2 class="fw-bold">Reservaciones</h2>
     <div class="d-flex">
@@ -98,6 +71,7 @@
       {% endfor %}
     </div>
   </section>
-</div>
+  {% endcomment %}
+</section>
 
 {% endblock content %}

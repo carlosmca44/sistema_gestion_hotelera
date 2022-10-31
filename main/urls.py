@@ -9,5 +9,7 @@ urlpatterns = [
     path('reservation/delete/<int:reservationId>/',
          views.deleteReservation, name="deleteReservation"),
     path('reservation/edit/<int:reservationId>',
-         views.editReservation, name='editReservation')
+         views.editReservation, name='editReservation'),
+    path('csuggestion/', views.complaintSuggestion, name='csuggestions'),
+    path('csuggestion/new', views.createCSuggestion, name='newCSuggestion'),
 ]

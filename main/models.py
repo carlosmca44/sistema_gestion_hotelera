@@ -34,8 +34,8 @@ class QSugerencias(models.Model):
     name = models.ForeignKey(Reservacion, on_delete=models.CASCADE)
     roomNumber = models.ForeignKey(Habitacion, on_delete=models.CASCADE)
     info = models.CharField(max_length=500)
-    doneResponse = models.BooleanField()
-    response = models.CharField(max_length=500)
+    doneResponse = models.BooleanField(default=False)
+    response = models.CharField(max_length=500, default='')
 
     def __str__(self):
-        return self.name
+        return self.name.__str__()
