@@ -14,4 +14,8 @@ urlpatterns = [
     path('csuggestion/new', views.createCSuggestion, name='newCSuggestion'),
     path('csuggestion/edit/<int:csuggestionId>',
          views.editCSuggestion, name='editCSuggestion'),
+    path('csuggestion/delete/<int:csuggestionId>/',
+         views.deleteReservation, name="deleteCSuggestion"),
+    path('reservation/delete/<int:reservationId>/',
+         views.deleteReservation, name="deleteReservation"),
 ]

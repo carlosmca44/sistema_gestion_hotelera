@@ -42,7 +42,10 @@
         >
           <div class="accordion-body">
             <div class="w-100 d-flex gap-5">
-              <a href="" class="btn btn-primary" style="width: 100%"
+              <a
+                href="{% url 'deleteCSuggestion' csdata.id %}"
+                class="btn btn-primary"
+                style="width: 100%"
                 >Eliminar</a
               >
               <a

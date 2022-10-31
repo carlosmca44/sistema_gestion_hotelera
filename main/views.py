@@ -99,3 +99,9 @@ def editCSuggestion(request, csuggestionId):
 
     context = {'form': form}
     return render(request, 'complaint_suggestions/csuggestion_edit.html', context)
+
+
+def deleteReservation(request, csuggestionId):
+    csuggestion = QSugerencias.objects.get(id=csuggestionId)
+    csuggestion.delete()
+    return redirect('csuggestions')
