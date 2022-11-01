@@ -11,6 +11,9 @@
       style="width: 500px"
     >
       {% csrf_token %} {{ form }}
+      <a href="{% url 'home' %}" class="btn back-button w-100"
+        >Atrás</a
+      >
       <button class="btn btn-primary w-100">Editar</button>
     </form>
   </div>

@@ -2,7 +2,20 @@
 
 <section class="container pt-4">
   <div class="d-flex justify-content-between">
-    <h2 class="fw-bold">Quejas y sugerencias</h2>
+    <div class="d-flex align-items-center gap-3">
+      <a
+        href="{% url 'home' %}"
+        class="text-decoration-none"
+        style="color: black"
+        ><i
+          class="fa-solid fa-arrow-left rounded-circle p-3 back-arrow-button"
+        ></i
+      ></a>
+      <!-- <i
+        class="fa-solid fa-arrow-left bg-success p-3 rounded-circle back-arrow-button"
+      ></i> -->
+      <h2 class="fw-bold">Quejas y sugerencias</h2>
+    </div>
     <a
       href="{% url 'newCSuggestion' %}"
       class="text-decoration-none gbutton"
@@ -10,55 +23,44 @@
     >
   </div>
   <section class="container my-5 w-100 w-md-75">
-    <div class="d-flex">
-      <p class="fw-bold col-4">A nombre de:</p>
-      <p class="fw-bold col-1 text-center">Habitacion</p>
-      <p class="fw-bold col-3 text-center">Queja o sugerencia</p>
-    </div>
-    <div class="accordion" id="accordionExample">
-      {% for csdata in cs %}
-      <div class="accordion-item">
-        <h2 class="accordion-header" id="heading{{csdata.id}}">
-          <button
-            class="accordion-button"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#collapse{{csdata.id}}"
-            aria-expanded="true"
-            aria-controls="collapse{{csdata.id}}"
-          >
-            <div class="col-4">
-              {{csdata.name}} {{csdata.lastName}}
-            </div>
-            <div class="col-1 text-center">{{csdata.roomNumber}}</div>
-            <div class="col-3 text-center">{{csdata.info}}</div>
-          </button>
-        </h2>
-        <div
-          id="collapse{{csdata.id}}"
-          class="accordion-collapse collapse"
-          aria-labelledby="heading{{reservation.id}}"
-          data-bs-parent="#accordionExample"
-        >
-          <div class="accordion-body">
-            <div class="w-100 d-flex gap-5">
-              <a
-                href="{% url 'deleteCSuggestion' csdata.id %}"
-                class="btn btn-primary"
-                style="width: 100%"
-                >Eliminar</a
-              >
-              <a
-                href="{% url 'editCSuggestion' csdata.id %}"
-                class="btn btn-danger"
-                style="width: 100%"
-                >Editar</a
-              >
-            </div>
-          </div>
-        </div>
+    <div class="card py-3">
+      <div class="card-body">
+        <table id="table_id" class="display table table-striped">
+          <thead class="table-light">
+            <tr>
+              <th>A nombre de:</th>
+              <th>Habitacion</th>
+              <th>Queja o sugerencia</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for csdata in cs %}
+            <tr>
+              <td>{{csdata.name}}</td>
+              <td>{{csdata.roomNumber}}</td>
+              <td>{{csdata.info}}</td>
+              <td>
+                <div class="d-flex gap-4">
+                  <a
+                    href="{% url 'deleteCSuggestion' csdata.id %}"
+                    class="btn btn-primary w-50"
+                    >Eliminar
+                    <i class="fa-solid fa-trash"></i>
+                  </a>
+                  <a
+                    href="{% url 'editCSuggestion' csdata.id %}"
+                    class="btn btn-danger w-50"
+                    >Editar
+                    <i class="fa-solid fa-pencil"></i>
+                  </a>
+                </div>
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
       </div>
-      {% endfor %}
     </div>
   </section>
 </section>

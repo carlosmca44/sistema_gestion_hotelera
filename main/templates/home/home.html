@@ -39,63 +39,46 @@
 
   <section class="container my-5 w-100 w-md-75">
     <h2 class="fw-bold">Reservaciones</h2>
-    <div class="d-flex">
-      <p class="fw-bold col-4">Nombre</p>
-      <p class="fw-bold col-3 text-center">Fecha de entrada</p>
-      <p class="fw-bold col-3 text-center">Fecha de salida</p>
-      <p class="fw-bold col-1 text-center">Habitacion</p>
-    </div>
-    <div class="accordion" id="accordionExample">
-      {% for reservation in names %}
-      <div class="accordion-item">
-        <h2 class="accordion-header" id="heading{{reservation.id}}">
-          <button
-            class="accordion-button"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#collapse{{reservation.id}}"
-            aria-expanded="true"
-            aria-controls="collapse{{reservation.id}}"
-          >
-            <div class="col-4">
-              {{reservation.name}} {{reservation.lastName}}
-            </div>
-            <div class="col-3 text-center">
-              {{reservation.entry_date}}
-            </div>
-            <div class="col-3 text-center">
-              {{reservation.out_date}}
-            </div>
-            <div class="col-1 text-center">
-              {{reservation.roomNumber}}
-            </div>
-          </button>
-        </h2>
-        <div
-          id="collapse{{reservation.id}}"
-          class="accordion-collapse collapse"
-          aria-labelledby="heading{{reservation.id}}"
-          data-bs-parent="#accordionExample"
-        >
-          <div class="accordion-body">
-            <div class="w-100 d-flex gap-5">
-              <a
-                href="{% url 'deleteReservation' reservation.id %}"
-                class="btn btn-primary"
-                style="width: 100%"
-                >Eliminar</a
-              >
-              <a
-                href="{% url 'editReservation' reservation.id %}"
-                class="btn btn-danger"
-                style="width: 100%"
-                >Editar</a
-              >
-            </div>
-          </div>
-        </div>
+    <div class="card py-3">
+      <div class="card-body">
+        <table id="table_id" class="display table table-striped">
+          <thead class="table-light">
+            <tr>
+              <th>Nombre</th>
+              <th>Fecha de entrada</th>
+              <th>Fecha de salida</th>
+              <th>Habitacion</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for reservation in names %}
+            <tr>
+              <td>{{reservation.name}} {{reservation.lastName}}</td>
+              <td>{{reservation.entry_date}}</td>
+              <td>{{reservation.out_date}}</td>
+              <td>{{reservation.roomNumber}}</td>
+              <td>
+                <div class="d-flex gap-4">
+                  <a
+                    href="{% url 'deleteReservation' reservation.id %}"
+                    class="btn btn-primary w-50"
+                    >Eliminar
+                    <i class="fa-solid fa-trash"></i>
+                  </a>
+                  <a
+                    href="{% url 'editReservation' reservation.id %}"
+                    class="btn btn-danger w-50"
+                    >Editar
+                    <i class="fa-solid fa-pencil"></i>
+                  </a>
+                </div>
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
       </div>
-      {% endfor %}
     </div>
   </section>
 </div>

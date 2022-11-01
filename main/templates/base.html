@@ -12,6 +12,11 @@
 
     <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}" />
     <link rel="stylesheet" href="{% static 'css/styles.css' %}" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'plugins/data_tables/datatables.min.css' %}"
+    />
 
     <title>Gestión hotelera</title>
   </head>
@@ -43,10 +48,25 @@
       integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
       crossorigin="anonymous"
     ></script>
+
     <!-- Font Awesome icons (free version)-->
     <script
       src="https://use.fontawesome.com/releases/v6.1.0/js/all.js"
       crossorigin="anonymous"
     ></script>
+
+    <!-- jQuery -->
+    <script src="{% static 'plugins/data_tables/jquery/jquery.min.js'   %}"></script>
+
+    <!-- Datatable-->
+    <script
+      type="text/javascript"
+      src="{% static 'plugins/data_tables/datatables.min.js' %}"
+    ></script>
+    <script>
+      $(document).ready(function () {
+        $("#table_id").DataTable();
+      });
+    </script>
   </body>
 </html>
