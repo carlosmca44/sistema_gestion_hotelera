@@ -11,6 +11,7 @@ class Habitacion(models.Model):
 
 class Usuario(models.Model):
     name = models.CharField(max_length=50)
+    lastname = models.CharField(max_length=50)
     nickname = models.CharField(max_length=20)
     password = models.CharField(max_length=15)
     category = models.CharField(max_length=20)

@@ -1,17 +1,39 @@
 from django import forms
 from .models import *
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
+# from django.contrib.auth.views import LoginView
 
 
-class LoginAuth (forms.Form):
-    username = forms.CharField()
-    password = forms.CharField()
+# class LoginAuth(forms.ModelForm):
+#     username = forms.CharField(label='Nombre de usuario', widget=forms.TextInput(
+#         attrs={'class': 'form-control'}))
+#     password = forms.CharField(label='Contraseña', widget=forms.PasswordInput(
+#         attrs={'class': 'form-control'}))
+
+#     class Meta:
+#         model = User
+#         fields = ['username', 'password']
+#         help_texts = {k: '' for k in fields}
 
 
-class SignInAuth(forms.Form):
-    name = forms.CharField()
-    username = forms.CharField()
-    password = forms.CharField()
-    rol = forms.CharField()
+class SignInAuth(UserCreationForm):
+    name = forms.CharField(
+        label='Nombre', widget=forms.TextInput(attrs={'class': 'form-control'}))
+    password1 = forms.CharField(
+        label='Contraseña', widget=forms.PasswordInput(attrs={'class': 'form-control'}))
+    password2 = forms.CharField(
+        label='Confirmar contraseña', widget=forms.PasswordInput(attrs={'class': 'form-control'}))
+    category = forms.CharField(
+        label='Rol', widget=forms.TextInput(attrs={'class': 'form-control'}))
+
+    class Meta:
+        model = User
+        fields = ['name', 'username', 'password1', 'password2', 'category']
+        help_texts = {k: '' for k in fields}
+        widgets = {
+            'username': forms.TextInput(attrs={'class': 'form-control'}),
+        }
 
 
 class ReservationForm(forms.ModelForm):

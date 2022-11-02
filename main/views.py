@@ -3,22 +3,23 @@ from .forms import *
 from .models import *
 
 
-def auth_login(request):
-    if request.method == 'POST':
-        form = LoginAuth(request.POST)
-        if form.is_valid():
-            return redirect('home')
-    else:
-        form = LoginAuth()
+# def auth_login(request):
+#     if request.method == 'POST':
+#         form = LoginAuth(request.POST)
+#         if form.is_valid():
+#             return redirect('home')
+#     else:
+#         form = LoginAuth()
 
-    context = {'form': form}
-    return render(request, 'login/login.html', context)
+#     context = {'form': form}
+#     return render(request, 'login/login.html', context)
 
 
 def auth_signin(request):
     if request.method == 'POST':
         form = SignInAuth(request.POST)
         if form.is_valid():
+            form.save()
             return redirect('login')
     else:
         form = SignInAuth()
