@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 
 class Habitacion(models.Model):
@@ -10,14 +11,15 @@ class Habitacion(models.Model):
 
 
 class Usuario(models.Model):
-    name = models.CharField(max_length=50)
-    lastname = models.CharField(max_length=50)
-    nickname = models.CharField(max_length=20)
-    password = models.CharField(max_length=15)
+    first_name = models.CharField(max_length=50, null=True)
+    last_name = models.CharField(max_length=50, null=True)
+    username = models.OneToOneField(
+        User, on_delete=models.CASCADE, max_length=20)
+    password = models.CharField(max_length=15, null=True)
     category = models.CharField(max_length=20)
 
     def __str__(self):
-        return self.name
+        return self.username.__str__()
 
 
 class Reservacion(models.Model):

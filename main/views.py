@@ -1,18 +1,7 @@
 from django.shortcuts import render, redirect
 from .forms import *
 from .models import *
-
-
-# def auth_login(request):
-#     if request.method == 'POST':
-#         form = LoginAuth(request.POST)
-#         if form.is_valid():
-#             return redirect('home')
-#     else:
-#         form = LoginAuth()
-
-#     context = {'form': form}
-#     return render(request, 'login/login.html', context)
+from django.contrib.auth.decorators import login_required
 
 
 def auth_signin(request):
@@ -28,6 +17,7 @@ def auth_signin(request):
     return render(request, 'login/signin.html', context)
 
 
+@login_required
 def home(request):
     names = Reservacion.objects.all()
     totalR = Reservacion.objects.count()
@@ -36,6 +26,7 @@ def home(request):
     return render(request, 'home/home.html', context)
 
 
+@login_required
 def createReservation(request):
     if request.method == 'POST':
         form = ReservationForm(request.POST)
@@ -55,6 +46,7 @@ def deleteReservation(request, reservationId):
     return redirect('home')
 
 
+@login_required
 def editReservation(request, reservationId):
     reservation = Reservacion.objects.get(id=reservationId)
     if request.method == 'POST':
@@ -69,12 +61,14 @@ def editReservation(request, reservationId):
     return render(request, 'reservations/edit_reservation.html', context)
 
 
+@login_required
 def complaintSuggestion(request):
     cs = QSugerencias.objects.all()
     context = {'cs': cs}
     return render(request, 'complaint_suggestions/csuggestions.html', context)
 
 
+@login_required
 def createCSuggestion(request):
     if request.method == 'POST':
         form = CSuggestionsForm(request.POST)
@@ -88,6 +82,7 @@ def createCSuggestion(request):
     return render(request, 'complaint_suggestions/csuggestions_form.html', context)
 
 
+@login_required
 def editCSuggestion(request, csuggestionId):
     csuggestion = QSugerencias.objects.get(id=csuggestionId)
     if request.method == 'POST':
