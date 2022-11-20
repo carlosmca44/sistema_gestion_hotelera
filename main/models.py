@@ -1,5 +1,6 @@
 from django.db import models
-from django.contrib.auth.models import User
+from django.contrib.auth.models import AbstractUser
+from django.conf import settings
 
 
 class Habitacion(models.Model):
@@ -10,16 +11,20 @@ class Habitacion(models.Model):
         return self.roomNumber.__str__()
 
 
-class Usuario(models.Model):
+class UserProfile(models.Model):
     first_name = models.CharField(max_length=50, null=True)
     last_name = models.CharField(max_length=50, null=True)
     username = models.OneToOneField(
-        User, on_delete=models.CASCADE, max_length=20)
+        settings.AUTH_USER_MODEL, on_delete=models.CASCADE, max_length=20)
     password = models.CharField(max_length=15, null=True)
     category = models.CharField(max_length=20)
 
     def __str__(self):
         return self.username.__str__()
+
+
+class User(AbstractUser):
+    category = models.CharField(max_length=20)
 
 
 class Reservacion(models.Model):
