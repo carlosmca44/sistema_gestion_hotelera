@@ -1,0 +1,68 @@
+<section class="container my-5 w-100 w-md-75">
+  <div class="card py-3">
+    <div class="card-body">
+      <table id="table_id" class="display table table-striped">
+        <thead class="table-light">
+          <tr>
+            <th>A nombre de:</th>
+            <th>Habitacion</th>
+            <th>Queja o sugerencia</th>
+            {% if request.user.category == '1' %}
+            <td>Respuesta</td>
+            {% endif %}
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for csdata in cs %}
+          <tr>
+            <td>{{csdata.name}}</td>
+            <td>{{csdata.roomNumber}}</td>
+            <td>{{csdata.info}}</td>
+            {% if request.user.category == '1' %}
+            <td>{{csdata.response}}</td>
+            {% endif %}
+            <td>
+              <div class="d-flex gap-4">
+                {% if request.user.category == '1' %}
+                <a
+                  href="{% url 'home' %}"
+                  class="btn btn-primary w-25"
+                >
+                  <i class="fa-solid fa-eye"></i>
+                </a>
+                {% if csdata.doneResponse == 'True' %}
+                <a href="{% url 'home' %}" class="btn btn-danger w-75"
+                  >Editar Respuesta
+                  <i class="fa-solid fa-pencil"></i>
+                </a>
+                {% else %}
+                <a
+                  href="{% url 'home' %}"
+                  class="btn btn-success w-75"
+                  >Responder
+                  <i class="fa-solid fa-pencil"></i>
+                </a>
+                {% endif %} {% else %}
+                <a
+                  href="{% url 'deleteCSuggestion' csdata.id %}"
+                  class="btn btn-primary w-50"
+                  >Eliminar
+                  <i class="fa-solid fa-trash"></i>
+                </a>
+                <a
+                  href="{% url 'editCSuggestion' csdata.id %}"
+                  class="btn btn-danger w-50"
+                  >Editar
+                  <i class="fa-solid fa-pencil"></i>
+                </a>
+                {% endif %}
+              </div>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>

@@ -1,86 +1,11 @@
 {% extends 'base.html' %} {% load static %} {% block content %}
 
 <div style="height: 100vh">
-  <section>
-    <div class="d-flex gap-5 justify-content-center mt-5">
-      <div class="flex-column-center">
-        <p class="d-flex align-items-center gap-3 fw-bold">
-          Reservaciones actuales: {{total}}
-          <i class="fa-solid fa-calendar-check fa-lg"></i>
-        </p>
-        <a
-          href="{% url 'newReservation' %}"
-          class="text-decoration-none gbutton"
-          >Nueva Reservacion</a
-        >
-      </div>
-      <div class="flex-column-center">
-        <p class="d-flex align-items-center gap-3 fw-bold">
-          Disponibilidad: {{disp}}
-          <i class="fa-solid fa-house fa-lg"></i>
-        </p>
-        <a href="" class="text-decoration-none gbutton"
-          >Habitaciones Disponibles</a
-        >
-      </div>
-      <div class="flex-column-center">
-        <p class="d-flex align-items-center gap-3 fw-bold">
-          Total QyS: 7
-          <i class="fa-solid fa-house-circle-exclamation fa-lg"></i>
-        </p>
-        <a
-          href="{% url 'csuggestions' %}"
-          class="text-decoration-none gbutton"
-          >Quejas y Sugerencias</a
-        >
-      </div>
-    </div>
-  </section>
-
-  <section class="container my-5 w-100 w-md-75">
-    <h2 class="fw-bold">Reservaciones</h2>
-    <div class="card py-3">
-      <div class="card-body">
-        <table id="table_id" class="display table table-striped">
-          <thead class="table-light">
-            <tr>
-              <th>Nombre</th>
-              <th>Fecha de entrada</th>
-              <th>Fecha de salida</th>
-              <th>Habitacion</th>
-              <th>Acciones</th>
-            </tr>
-          </thead>
-          <tbody>
-            {% for reservation in names %}
-            <tr>
-              <td>{{reservation.name}} {{reservation.lastName}}</td>
-              <td>{{reservation.entry_date}}</td>
-              <td>{{reservation.out_date}}</td>
-              <td>{{reservation.roomNumber}}</td>
-              <td>
-                <div class="d-flex gap-4">
-                  <a
-                    href="{% url 'deleteReservation' reservation.id %}"
-                    class="btn btn-primary w-50"
-                    >Eliminar
-                    <i class="fa-solid fa-trash"></i>
-                  </a>
-                  <a
-                    href="{% url 'editReservation' reservation.id %}"
-                    class="btn btn-danger w-50"
-                    >Editar
-                    <i class="fa-solid fa-pencil"></i>
-                  </a>
-                </div>
-              </td>
-            </tr>
-            {% endfor %}
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </section>
+  {% if request.user.category == '1' %}
+  <div>{% include 'home/admin.html' %}</div>
+  {% else %}
+  <div>{% include 'home/reception.html' %}</div>
+  {% endif %}
 </div>
 
 {% endblock content %}

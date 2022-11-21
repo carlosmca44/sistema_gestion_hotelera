@@ -22,47 +22,7 @@
       >Nueva queja o sugerencia</a
     >
   </div>
-  <section class="container my-5 w-100 w-md-75">
-    <div class="card py-3">
-      <div class="card-body">
-        <table id="table_id" class="display table table-striped">
-          <thead class="table-light">
-            <tr>
-              <th>A nombre de:</th>
-              <th>Habitacion</th>
-              <th>Queja o sugerencia</th>
-              <th>Acciones</th>
-            </tr>
-          </thead>
-          <tbody>
-            {% for csdata in cs %}
-            <tr>
-              <td>{{csdata.name}}</td>
-              <td>{{csdata.roomNumber}}</td>
-              <td>{{csdata.info}}</td>
-              <td>
-                <div class="d-flex gap-4">
-                  <a
-                    href="{% url 'deleteCSuggestion' csdata.id %}"
-                    class="btn btn-primary w-50"
-                    >Eliminar
-                    <i class="fa-solid fa-trash"></i>
-                  </a>
-                  <a
-                    href="{% url 'editCSuggestion' csdata.id %}"
-                    class="btn btn-danger w-50"
-                    >Editar
-                    <i class="fa-solid fa-pencil"></i>
-                  </a>
-                </div>
-              </td>
-            </tr>
-            {% endfor %}
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </section>
+  {% include 'complaint_suggestions/csuggestion_list.html' %}
 </section>
 
 {% endblock content %}

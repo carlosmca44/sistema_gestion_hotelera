@@ -19,10 +19,17 @@ def auth_signin(request):
 
 @login_required
 def home(request):
+    # reception
     names = Reservacion.objects.all()
-    totalR = Reservacion.objects.count()
-    disp = 100 - totalR
-    context = {'names': names, 'total': totalR, 'disp': disp}
+    totalReservations = Reservacion.objects.count()
+    disp = 100 - totalReservations
+
+    # administration
+    totalUsers = UserProfile.objects.count()
+    cs = QSugerencias.objects.all()
+
+    context = {'names': names, 'total': totalReservations,
+               'disp': disp, 'cs': cs}
     return render(request, 'home/home.html', context)
 
 

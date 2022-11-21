@@ -31,8 +31,13 @@
           href="{% url 'home' %}"
           class="navbar-brand text-black d-flex align-items-center gap-4"
         >
+          {% if request.user.category == '1' %}
+          <h1 class="fw-bold">Administración</h1>
+          <i class="fa-solid fa-user-tie fa-2xl"></i>
+          {% else %}
           <h1 class="fw-bold">Recepción</h1>
           <i class="fa-solid fa-bell-concierge fa-2xl"></i>
+          {% endif %}
         </a>
         {{request.user}}
         <a

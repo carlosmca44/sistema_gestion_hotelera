@@ -1,0 +1,27 @@
+<section>
+  <div class="d-flex gap-5 justify-content-center mt-5">
+    <div class="flex-column-center">
+      <p class="d-flex align-items-center gap-3 fw-bold">
+        Reservaciones actuales: {{total}}
+        <i class="fa-solid fa-calendar-check fa-lg"></i>
+      </p>
+      <a href="{% url 'home' %}" class="text-decoration-none gbutton"
+        >Listado de Reservaciones</a
+      >
+    </div>
+    <div class="flex-column-center">
+      <p class="d-flex align-items-center gap-3 fw-bold">
+        Registrados: {{disp}}
+        <i class="fa-solid fa-user fa-lg"></i>
+      </p>
+      <a href="" class="text-decoration-none gbutton"
+        >Usuarios en el sistema</a
+      >
+    </div>
+  </div>
+</section>
+
+<section class="container my-5 w-100 w-md-75">
+  <h2 class="fw-bold">Quejas y Sugerencias</h2>
+  {% include 'complaint_suggestions/csuggestion_list.html' %}
+</section>
