@@ -104,7 +104,40 @@ def editCSuggestion(request, csuggestionId):
     return render(request, 'complaint_suggestions/csuggestion_edit.html', context)
 
 
-def deleteReservation(request, csuggestionId):
+@login_required
+def askCSuggestion(request, csuggestionId):
+    csuggestion = QSugerencias.objects.get(id=csuggestionId)
+    info = csuggestion.info
+    if request.method == 'POST':
+        form = AskCSuggestions(request.POST, instance=csuggestion)
+        if form.is_valid():
+            form.save()
+            return redirect('home')
+    else:
+        form = AskCSuggestions()
+
+    context = {'form': form, 'info': info}
+    return render(request, 'complaint_suggestions/csuggestion_response.html', context)
+
+
+@login_required
+def deleteCSuggestion(request, csuggestionId):
     csuggestion = QSugerencias.objects.get(id=csuggestionId)
     csuggestion.delete()
     return redirect('csuggestions')
+
+
+@login_required
+def editReponseCSuggestion(request, csuggestionId):
+    csuggestion = QSugerencias.objects.get(id=csuggestionId)
+    info = csuggestion.info
+    if request.method == 'POST':
+        form = AskCSuggestions(request.POST, instance=csuggestion)
+        if form.is_valid():
+            form.save()
+            return redirect('home')
+    else:
+        form = AskCSuggestions(instance=csuggestion)
+
+    context = {'form': form, 'info': info}
+    return render(request, 'complaint_suggestions/edit_response_csuggestion.html', context)

@@ -55,3 +55,13 @@ class CSuggestionsForm(forms.ModelForm):
             'roomNumber': forms.Select(attrs={'class': 'form-select'}),
             'info': forms.Textarea(attrs={'class': 'form-control'}),
         }
+
+
+class AskCSuggestions(forms.ModelForm):
+    class Meta:
+        model = QSugerencias
+        fields = ['response']
+        labels = {
+            'response': 'Respuesta'
+        }
+        widgets = {'response': forms.Textarea(attrs={'class': 'form-control'})}
