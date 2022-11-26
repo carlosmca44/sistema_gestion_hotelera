@@ -25,4 +25,6 @@ urlpatterns = [
          views.editReponseCSuggestion, name='editResponseCSuggestion'),
     path('users-management/', views.usersManagement, name='userManagement'),
     path('users-management/new/', views.createUser, name='createUser'),
+    path('users-management/delete/<int:userId>/',
+         views.deleteUser, name="deleteUser"),
 ]

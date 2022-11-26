@@ -38,53 +38,22 @@
           <tr>
             <td>{{user.first_name}} {{user.last_name}}</td>
             <td>{{user.username}}</td>
-            <td></td>
+            <td>********</td>
             <td>
               {% if user.category == '1' %}administrador {% else %}
               recepcionista {% endif %}
             </td>
             <td>
               <div class="d-flex gap-4">
-                {% if request.user.category == '1' %}
                 <a
-                  href="{% url 'home' %}"
+                  href="{% url 'deleteUser' user.id %}"
                   class="btn btn-primary w-25"
                 >
-                  <i class="fa-solid fa-eye"></i>
-                </a>
-                {% if user.response != '' %}
-                <a
-                  href="{% url 'editResponseCSuggestion' user.id %}"
-                  class="btn btn-danger w-75"
-                  >Editar Respuesta
-                  <i class="fa-solid fa-pencil"></i>
-                </a>
-                {% else %}
-                <a
-                  href="{% url 'askcsuggestion' user.id %}"
-                  class="btn btn-success w-75"
-                  >Responder
-                  <i class="fa-solid fa-pencil"></i>
-                </a>
-                {% endif %} {% else %}
-                <a
-                  href="{% url 'deleteCSuggestion' user.id %}"
-                  class="btn btn-primary w-50"
-                  >Eliminar
                   <i class="fa-solid fa-trash"></i>
                 </a>
-                {% if user.response != '' %}
                 <a href="#" class="btn btn-secondary w-25">
-                  <i class="fa-solid fa-eye"></i>
-                </a>
-                {% else %}
-                <a
-                  href="{% url 'editCSuggestion' user.id %}"
-                  class="btn btn-danger w-50"
-                  >Editar
                   <i class="fa-solid fa-pencil"></i>
                 </a>
-                {% endif %} {% endif %}
               </div>
             </td>
           </tr>

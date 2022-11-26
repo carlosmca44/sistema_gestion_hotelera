@@ -157,3 +157,10 @@ def usersManagement(request):
     users = UserProfile.objects.all()
     context = {'users': users}
     return render(request, 'users/users.html', context)
+
+
+@login_required
+def deleteUser(request, userId):
+    user = UserProfile.objects.get(id=userId)
+    user.delete()
+    return redirect('userManagement')
