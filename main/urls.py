@@ -8,6 +8,7 @@ urlpatterns = [
          LoginView.as_view(template_name='login/login.html'), name='login'),
     path('logout/', LogoutView.as_view(template_name='login/login.html'), name='logout'),
     path('signin/', views.auth_signin, name='signin'),
+    path('reservations/', views.reservations, name='reservations'),
     path('reservation/new', views.createReservation, name='newReservation'),
     path('reservation/delete/<int:reservationId>/',
          views.deleteReservation, name="deleteReservation"),

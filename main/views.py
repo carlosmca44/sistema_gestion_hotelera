@@ -22,6 +22,7 @@ def home(request):
     # reception
     names = Reservacion.objects.all()
     totalReservations = Reservacion.objects.count()
+    totalCSuggestions = QSugerencias.objects.count()
     disp = 100 - totalReservations
 
     # administration
@@ -29,8 +30,15 @@ def home(request):
     cs = QSugerencias.objects.all()
 
     context = {'names': names, 'total': totalReservations,
-               'disp': disp, 'cs': cs}
+               'disp': disp, 'cs': cs, 'totalCS': totalCSuggestions}
     return render(request, 'home/home.html', context)
+
+
+@login_required
+def reservations(request):
+    reservation = Reservacion.objects.all()
+    context = {'names': reservation}
+    return render(request, 'reservations/reservations.html', context)
 
 
 @login_required

@@ -1,0 +1,60 @@
+<section class="container my-5 w-100 w-md-75">
+  <div class="d-flex gap-2">
+    {% if request.user.category == '1' %}
+    <a
+      href="{% url 'home' %}"
+      class="text-decoration-none"
+      style="color: black"
+      ><i
+        class="fa-solid fa-arrow-left rounded-circle p-3 back-arrow-button"
+      ></i
+    ></a>
+    {% endif %}
+    <h2 class="fw-bold">Reservaciones</h2>
+  </div>
+  <div class="card py-3">
+    <div class="card-body">
+      <table id="table_id" class="display table table-striped">
+        <thead class="table-light">
+          <tr>
+            <th>Nombre</th>
+            <th>Fecha de entrada</th>
+            <th>Fecha de salida</th>
+            <th>Habitacion</th>
+            {% if request.user.category == '2' %}
+            <th>Acciones</th>
+            {% endif %}
+          </tr>
+        </thead>
+        <tbody>
+          {% for reservation in names %}
+          <tr>
+            <td>{{reservation.name}} {{reservation.lastName}}</td>
+            <td>{{reservation.entry_date}}</td>
+            <td>{{reservation.out_date}}</td>
+            <td>{{reservation.roomNumber}}</td>
+            {% if request.user.category == '2' %}
+            <td>
+              <div class="d-flex gap-4">
+                <a
+                  href="{% url 'deleteReservation' reservation.id %}"
+                  class="btn btn-primary w-50"
+                  >Eliminar
+                  <i class="fa-solid fa-trash"></i>
+                </a>
+                <a
+                  href="{% url 'editReservation' reservation.id %}"
+                  class="btn btn-danger w-50"
+                  >Editar
+                  <i class="fa-solid fa-pencil"></i>
+                </a>
+              </div>
+            </td>
+            {% endif %}
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
