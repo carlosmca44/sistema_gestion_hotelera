@@ -1,0 +1,98 @@
+{% extends 'base.html' %} {% load static %} {% block content %}
+
+<section class="container my-4 d-flex justify-content-between">
+  <div class="d-flex gap-2">
+    <a
+      href="{% url 'home' %}"
+      class="text-decoration-none"
+      style="color: black"
+      ><i
+        class="fa-solid fa-arrow-left rounded-circle p-3 back-arrow-button"
+      ></i
+    ></a>
+    <h2 class="fw-bold">Gestion de usuarios</h2>
+  </div>
+  <a
+    href="{% url 'createUser' %}"
+    class="text-decoration-none gbutton"
+    style="color: black"
+    >Agregar usuario<i class="fa-solid fa-user mx-2"></i
+  ></a>
+</section>
+
+<section class="container my-5 w-100 w-md-75">
+  <div class="card py-3">
+    <div class="card-body">
+      <table id="table_id" class="display table table-striped">
+        <thead class="table-light">
+          <tr>
+            <th>Nombre</th>
+            <th>Usuario</th>
+            <th>Contraseña</th>
+            <td>Acceso</td>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for user in users %}
+          <tr>
+            <td>{{user.first_name}} {{user.last_name}}</td>
+            <td>{{user.username}}</td>
+            <td></td>
+            <td>
+              {% if user.category == '1' %}administrador {% else %}
+              recepcionista {% endif %}
+            </td>
+            <td>
+              <div class="d-flex gap-4">
+                {% if request.user.category == '1' %}
+                <a
+                  href="{% url 'home' %}"
+                  class="btn btn-primary w-25"
+                >
+                  <i class="fa-solid fa-eye"></i>
+                </a>
+                {% if user.response != '' %}
+                <a
+                  href="{% url 'editResponseCSuggestion' user.id %}"
+                  class="btn btn-danger w-75"
+                  >Editar Respuesta
+                  <i class="fa-solid fa-pencil"></i>
+                </a>
+                {% else %}
+                <a
+                  href="{% url 'askcsuggestion' user.id %}"
+                  class="btn btn-success w-75"
+                  >Responder
+                  <i class="fa-solid fa-pencil"></i>
+                </a>
+                {% endif %} {% else %}
+                <a
+                  href="{% url 'deleteCSuggestion' user.id %}"
+                  class="btn btn-primary w-50"
+                  >Eliminar
+                  <i class="fa-solid fa-trash"></i>
+                </a>
+                {% if user.response != '' %}
+                <a href="#" class="btn btn-secondary w-25">
+                  <i class="fa-solid fa-eye"></i>
+                </a>
+                {% else %}
+                <a
+                  href="{% url 'editCSuggestion' user.id %}"
+                  class="btn btn-danger w-50"
+                  >Editar
+                  <i class="fa-solid fa-pencil"></i>
+                </a>
+                {% endif %} {% endif %}
+              </div>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+{% endblock content %}

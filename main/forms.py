@@ -3,7 +3,7 @@ from .models import *
 from django.contrib.auth.forms import UserCreationForm
 
 
-class SignInAuth(UserCreationForm):
+class userCreationForm(UserCreationForm):
 
     CATEGORIES = [('1', 'Administrador'), ('2', 'Recepcionista')]
 
