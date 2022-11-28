@@ -27,4 +27,6 @@ urlpatterns = [
     path('users-management/new/', views.createUser, name='createUser'),
     path('users-management/delete/<int:userId>/',
          views.deleteUser, name="deleteUser"),
+    path('users-management/edit/<int:userId>',
+         views.editUser, name='editUser'),
 ]
