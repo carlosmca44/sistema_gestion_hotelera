@@ -1,0 +1,81 @@
+{% extends 'base.html' %} {% load static %} {% block content %}
+
+<section
+  class="d-flex align-items-center justify-content-center"
+  style="height: 100vh"
+>
+  <div
+    class="d-flex flex-column align-items-center p-4 gap-3 rounded form-bg-container"
+  >
+    <h1>Editar usuario</h1>
+    <form
+      action=""
+      class="d-flex flex-column gap-3"
+      style="width: 500px"
+      method="post"
+    >
+      {% csrf_token %} {% comment %}
+      <label for="id_first_name">Nombre/s:</label
+      ><input
+        type="text"
+        name="first_name"
+        class="form-control"
+        maxlength="150"
+        id="id_first_name"
+      />
+      <label for="id_last_name">Apellido/s:</label
+      ><input
+        type="text"
+        name="last_name"
+        class="form-control"
+        maxlength="150"
+        id="id_last_name"
+      />
+      <label for="id_username">Nombre de usuario:</label
+      ><input
+        type="text"
+        name="username"
+        class="form-control"
+        maxlength="150"
+        autofocus=""
+        required=""
+        id="id_username"
+      />
+      <div class="d-none">
+        <label for="id_password1">Contraseña:</label
+        ><input
+          type="password"
+          name="password1"
+          class="form-control"
+          required=""
+          id="id_password1"
+          value="{{password}}"
+        />
+        <label for="id_password2">Confirmar contraseña:</label
+        ><input
+          type="password"
+          name="password2"
+          class="form-control"
+          required=""
+          id="id_password2"
+          value="{{password}}"
+        />
+      </div>
+      <label for="id_category">Rol:</label
+      ><select name="category" class="form-select" id="id_category">
+        <option value="1">Administrador</option>
+
+        <option value="2">Recepcionista</option></select
+      >{% endcomment %} {{form}}
+      <a href="/users-management/" class="btn back-button w-100"
+        >Atrás</a
+      >
+      <input
+        type="submit"
+        class="btn btn-primary w-100"
+        value="Aceptar"
+      />
+    </form>
+  </div>
+</section>
+{% endblock content %}

@@ -154,13 +154,32 @@ def editReponseCSuggestion(request, csuggestionId):
 
 @login_required
 def usersManagement(request):
-    users = UserProfile.objects.all()
-    context = {'users': users}
+    users = User.objects.all()
+    users_count = User.objects.count()
+    context = {'users': users, 'users_count': users_count}
     return render(request, 'users/users.html', context)
 
 
 @login_required
 def deleteUser(request, userId):
-    user = UserProfile.objects.get(id=userId)
-    user.delete()
+    user = User.objects.get(id=userId)
+    if request.user.id != userId:
+        user.delete()
+
     return redirect('userManagement')
+
+
+@login_required
+def editUser(request, userId):
+    user = User.objects.get(id=userId)
+    password = user.password
+    if request.method == 'POST':
+        form = userCreationForm(request.POST, instance=user)
+        if form.is_valid():
+            form.save()
+            return redirect('userManagement')
+    else:
+        form = userCreationForm(instance=user)
+
+    context = {'form': form, 'password': password}
+    return render(request, 'users/edit_user.html', context)
