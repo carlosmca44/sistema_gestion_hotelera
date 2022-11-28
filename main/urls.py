@@ -7,7 +7,6 @@ urlpatterns = [
     path('accounts/login/',
          LoginView.as_view(template_name='login/login.html'), name='login'),
     path('logout/', LogoutView.as_view(template_name='login/login.html'), name='logout'),
-    path('signin/', views.auth_signin, name='signin'),
     path('reservations/', views.reservations, name='reservations'),
     path('reservation/new', views.createReservation, name='newReservation'),
     path('reservation/delete/<int:reservationId>/',
@@ -23,5 +22,9 @@ urlpatterns = [
     path('csuggestion/response/<int:csuggestionId>/',
          views.askCSuggestion, name='askcsuggestion'),
     path('csuggestion/response/edit/<int:csuggestionId>/',
-         views.editReponseCSuggestion, name='editResponseCSuggestion')
+         views.editReponseCSuggestion, name='editResponseCSuggestion'),
+    path('users-management/', views.usersManagement, name='userManagement'),
+    path('users-management/new/', views.createUser, name='createUser'),
+    path('users-management/delete/<int:userId>/',
+         views.deleteUser, name="deleteUser"),
 ]

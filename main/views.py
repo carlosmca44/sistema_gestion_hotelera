@@ -4,17 +4,18 @@ from .models import *
 from django.contrib.auth.decorators import login_required
 
 
-def auth_signin(request):
+@login_required
+def createUser(request):
     if request.method == 'POST':
-        form = SignInAuth(request.POST)
+        form = userCreationForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('login')
+            return redirect('userManagement')
     else:
-        form = SignInAuth()
+        form = userCreationForm()
 
     context = {'form': form}
-    return render(request, 'login/signin.html', context)
+    return render(request, 'users/createUser.html', context)
 
 
 @login_required
@@ -149,3 +150,17 @@ def editReponseCSuggestion(request, csuggestionId):
 
     context = {'form': form, 'info': info}
     return render(request, 'complaint_suggestions/edit_response_csuggestion.html', context)
+
+
+@login_required
+def usersManagement(request):
+    users = UserProfile.objects.all()
+    context = {'users': users}
+    return render(request, 'users/users.html', context)
+
+
+@login_required
+def deleteUser(request, userId):
+    user = UserProfile.objects.get(id=userId)
+    user.delete()
+    return redirect('userManagement')

@@ -21,12 +21,13 @@
             <td>
               <div class="d-flex gap-4">
                 {% if request.user.category == '1' %}
-                <a
-                  href="{% url 'home' %}"
+                <button
+                  data-bs-toggle="modal"
+                  data-bs-target="#exampleModal"
                   class="btn btn-primary w-25"
                 >
                   <i class="fa-solid fa-eye"></i>
-                </a>
+                </button>
                 {% if csdata.response != '' %}
                 <a
                   href="{% url 'editResponseCSuggestion' csdata.id %}"
@@ -63,6 +64,52 @@
               </div>
             </td>
           </tr>
+
+          <!-- Modal -->
+          <div
+            class="modal fade"
+            id="exampleModal"
+            tabindex="-1"
+            aria-labelledby="exampleModalLabel"
+            aria-hidden="true"
+          >
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">
+                    {{csdata.name}}
+                  </h5>
+                  <button
+                    type="button"
+                    class="btn-close"
+                    data-bs-dismiss="modal"
+                    aria-label="Close"
+                  ></button>
+                </div>
+                <div class="modal-body">
+                  <div>
+                    <h6 class="fw-bold">Info</h6>
+                    <p class="">{{csdata.info}}</p>
+                  </div>
+                  <div>
+                    <h6 class="fw-bold">Respuesta</h6>
+                    <p class="p-2 border rounded">
+                      {{csdata.response}}
+                    </p>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button
+                    type="button"
+                    class="btn btn-secondary"
+                    data-bs-dismiss="modal"
+                  >
+                    Close
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
           {% endfor %}
         </tbody>
       </table>
