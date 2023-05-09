@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from .forms import *
-from .models import *
+from administracion.models import *
 from django.contrib.auth.decorators import login_required
 
 
@@ -18,17 +18,16 @@ def createUser(request):
     return render(request, 'users/createUser.html', context)
 
 
-@login_required
 def home(request):
     # reception
     names = Reservacion.objects.all()
     totalReservations = Reservacion.objects.count()
-    totalCSuggestions = QSugerencias.objects.count()
+    totalCSuggestions = Reclamacion.objects.count()
     disp = 100 - totalReservations
 
     # administration
     totalUsers = UserProfile.objects.count()
-    cs = QSugerencias.objects.all()
+    cs = Reclamacion.objects.all()
 
     context = {'names': names, 'total': totalReservations,
                'disp': disp, 'cs': cs, 'totalCS': totalCSuggestions}
@@ -79,7 +78,7 @@ def editReservation(request, reservationId):
 
 @login_required
 def complaintSuggestion(request):
-    cs = QSugerencias.objects.all()
+    cs = Reclamacion.objects.all()
     context = {'cs': cs}
     return render(request, 'complaint_suggestions/csuggestions.html', context)
 
@@ -100,7 +99,7 @@ def createCSuggestion(request):
 
 @login_required
 def editCSuggestion(request, csuggestionId):
-    csuggestion = QSugerencias.objects.get(id=csuggestionId)
+    csuggestion = Reclamacion.objects.get(id=csuggestionId)
     if request.method == 'POST':
         form = CSuggestionsForm(request.POST, instance=csuggestion)
         if form.is_valid():
@@ -115,7 +114,7 @@ def editCSuggestion(request, csuggestionId):
 
 @login_required
 def askCSuggestion(request, csuggestionId):
-    csuggestion = QSugerencias.objects.get(id=csuggestionId)
+    csuggestion = Reclamacion.objects.get(id=csuggestionId)
     info = csuggestion.info
     if request.method == 'POST':
         form = AskCSuggestions(request.POST, instance=csuggestion)
@@ -131,14 +130,14 @@ def askCSuggestion(request, csuggestionId):
 
 @login_required
 def deleteCSuggestion(request, csuggestionId):
-    csuggestion = QSugerencias.objects.get(id=csuggestionId)
+    csuggestion = Reclamacion.objects.get(id=csuggestionId)
     csuggestion.delete()
     return redirect('csuggestions')
 
 
 @login_required
 def editReponseCSuggestion(request, csuggestionId):
-    csuggestion = QSugerencias.objects.get(id=csuggestionId)
+    csuggestion = Reclamacion.objects.get(id=csuggestionId)
     info = csuggestion.info
     if request.method == 'POST':
         form = AskCSuggestions(request.POST, instance=csuggestion)
