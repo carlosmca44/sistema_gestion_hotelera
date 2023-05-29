@@ -1,0 +1,79 @@
+{% extends 'baseA.html' %}
+{% load static%}
+{% block content %}
+<div class="card mt-3">
+
+    <div class="container-fluid px-4 my-3">
+        <h1>SGH Harborlight</h1>
+        <ol class="breadcrumb mb-4">
+            <li class="breadcrumb-item active">Resumen</li>
+        </ol>
+
+        <div class="row">
+            <div class="col-xl-3 col-md-6">
+                <div class="card bg-primary text-white mb-4">
+                    <div class="card-body">
+                        <h6>Reservaciones</h6>
+                    </div>
+                    <div class="card-footer d-flex align-items-center justify-content-between">
+                        <a class="text-white text-decoration-none stretched-link" href="{% url 'reservations' %}">
+                            <h3>{{ totalReservaciones }}</h3>
+                        </a>
+                        <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-md-6">
+                <div class="card bg-success text-white mb-4">
+                    <div class="card-body">
+                        <h6>Quejas y Sugerencias</h6>
+                    </div>
+                    <div class="card-footer d-flex align-items-center justify-content-between">
+                        <a class="text-white text-decoration-none stretched-link" href="{% url 'reclamaciones' %}">
+                            <h3>{{ totalReclamaciones }}</h3>
+                        </a>
+                        <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-md-6">
+                <div class="card bg-danger text-white mb-4">
+                    <div class="card-body">
+                        <h6>
+                            Usuarios
+                        </h6>
+                    </div>
+                    <div class="card-footer d-flex align-items-center justify-content-between">
+                        <a class="text-white text-decoration-none stretched-link" href="{% url 'usuarios' %}">
+                            <h3>
+                                {{ totalUsers }}
+                            </h3>
+                        </a>
+                        <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-md-6">
+                <div class="card bg-warning text-white mb-4">
+                    <div class="card-body">
+                        <h6 class="text-dark">
+                            Hospedajes
+                        </h6>
+                    </div>
+                    <div class="card-footer d-flex align-items-center justify-content-between">
+                        <a class="text-white text-decoration-none stretched-link" href="#">
+                            <h3>
+                                {{ totalHospedajes }}
+                            </h3>
+                        </a>
+                        <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+
+{% endblock %}

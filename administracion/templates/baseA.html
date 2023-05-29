@@ -1,0 +1,166 @@
+
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>VargasTech - SB Admin</title>
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+        <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
+        <link href="{% static 'assets/vendor/boxicons/css/boxicons.min.css' %}" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="{% static 'datatable/data_tables/datatables.min.css' %}" />
+        <link href="{% static 'css/styles.css' %}" rel="stylesheet" />
+        
+  <!-- Favicons -->
+  <link href="{% static 'img/favicon.png' %} " rel="icon">
+  <link href="{% static 'img/apple-touch-icon.png' %} " rel="apple-touch-icon">
+    </head>
+    <body class="sb-nav-fixed">
+        <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark" style="height: max-content;">
+            <!-- Navbar Brand-->
+            {% comment %} <a class="navbar-brand ps-3" href="{% url 'index' %}"> {% endcomment %}
+                <img src="{% static 'img/il1.png' %}" style="width: 150px;" alt="">
+            </a>
+            <!-- Sidebar Toggle-->
+            <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><img style="filter: invert(1);" width=15 src="{% static 'svg/bars-solid.svg' %}" alt=""></button>
+            
+            <ul class="navbar-nav ms-auto me-0 me-md-3 my-2 my-md-0">
+                {% comment %} {% if user.is_authenticated %} {% endcomment %}
+            <h5 style="color: aliceblue;" class="mt-2">{{user.username}}</h5>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><img style="filter: invert(1);" width=20 src="{% static 'svg/user-solid.svg' %}" alt=""></a>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                        
+                        
+                        <li><a class="dropdown-item" href="#!">{{ user.username }}</a></li>
+                        {% comment %} {% if user.is_superuser %} {% endcomment %}
+                        <li><a class="dropdown-item" href="/admin/">Administrar DB <img width=15 src="{% static 'svg/database-solid.svg' %}" alt=""></a></li>
+                        {% comment %} {% endif %} {% endcomment %}
+                        {% comment %} <li><a class="dropdown-item" href="{% url 'indexFinanzas' %}">Finanzas <img width=20 src="{% static 'svg/money-check-dollar-solid.svg' %}" alt=""></a></li> {% endcomment %}
+                        <li><hr class="dropdown-divider" /></li>
+                        {% comment %} <li><a class="dropdown-item" href="{% url 'logout' %}">Logout <img width=20 src="{% static 'svg/door-open-solid.svg' %}" alt=""></a></li> {% endcomment %}
+                        {% comment %} {% endif %} {% endcomment %}
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+
+        <div id="layoutSidenav">
+            <div id="layoutSidenav_nav">
+                <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+                    <div class="sb-sidenav-menu">
+                        <div class="nav">
+                            <div class="sb-sidenav-menu-heading">Sistema</div>
+                            <a class="nav-link" href="{% url 'indexA' %}">
+                                <div class="sb-nav-link-icon"><img style="filter: invert(1);" width=15 src="{% static 'svg/laptop-code-solid.svg' %}" alt=""></div>
+                                Inicio
+                            </a>
+                            <a class="nav-link" href="{% url 'reservations' %}">
+                                <div class="sb-nav-link-icon"><img style="filter: invert(1);" width=15 src="{% static 'svg/gauge-high-solid.svg' %}" alt=""></div>
+                                Reservaciones
+                            </a>
+                            
+                            <a class="nav-link" href="{% url 'reclamaciones' %}">
+                                <div class="sb-nav-link-icon"><img style="filter: invert(1);" width=15 src="{% static 'svg/users-solid.svg' %}" alt=""></div>
+                                Quejas y Sugerencias
+                            </a>
+                            <div class="sb-sidenav-menu-heading">Estructuras</div>
+                            <a class="nav-link" href="{% url 'usuarios' %}">
+                                <div class="sb-nav-link-icon"><img style="filter: invert(1);" width=15 src="{% static 'svg/file-lines-solid.svg' %}" alt=""></div>
+                                Usuarios
+                            </a>
+                            <!-- <a class="nav-link" href="#">
+                                <div class="sb-nav-link-icon"><img style="filter: invert(1);" width=15 src="{% static 'svg/clipboard-solid.svg' %}" alt=""></div>
+                                Servicios
+                            </a>
+                            <a class="nav-link" href="#">
+                                <div class="sb-nav-link-icon"><img style="filter: invert(1);" width=15 src="{% static 'svg/handshake-angle-solid.svg' %}" alt=""></div>
+                                Trabajos
+                            </a>
+                            <a class="nav-link" href="#">
+                                <div class="sb-nav-link-icon"><img style="filter: invert(1);" width=15 src="{% static 'svg/images-solid.svg' %}" alt=""></div>
+                                Imagenes para los Trabajos
+                            </a>
+                            <a class="nav-link" href="#">
+                                <div class="sb-nav-link-icon"><img style="filter: invert(1);" width=15 src="{% static 'svg/trophy-solid.svg' %}" alt=""></div>
+                                Datos nuestros
+                            </a>
+                            <div class="sb-sidenav-menu-heading">Del Usuario</div>
+                            <a class="nav-link" href="#">
+                                <div class="sb-nav-link-icon"><img style="filter: invert(1);" width=15 src="{% static 'svg/gavel-solid.svg' %}" alt=""></div>
+                                Testimonios
+                            </a>
+                            <a class="nav-link" href="#">
+                                <div class="sb-nav-link-icon"><img style="filter: invert(1);" width=15 src="{% static 'svg/address-book-solid.svg' %}" alt=""></div>
+                                Contactos
+                            </a> -->
+                        </div>
+                    </div>
+                    <div class="sb-sidenav-footer">
+                        <div class="small">Logged in as:</div>
+                        {% comment %} {{ user.username }} {% endcomment %}as
+                    </div>
+                </nav>
+            </div>
+            <div id="layoutSidenav_content">
+                <main class="px-4">
+                    {% block content%}{% endblock %}
+                </main>
+                <footer class="py-4 bg-light mt-auto">
+                    <div class="container-fluid px-4">
+                        <div class="d-flex align-items-center justify-content-between small">
+                            <div class="text-muted">Copyright &copy; Vargas Technology 2023</div>
+                            <div>
+                                <a href="#">Política de Privacidad</a>
+                                &middot;
+                                <a href="#">Términos y condiciones</a>
+                            </div>
+                        </div>
+                    </div>
+                </footer>
+            </div>
+        </div>
+        <!-- Bootstrap -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+
+        <script src="{% static 'js/scripts.js' %}"></script>
+
+        <!-- DataTables -->
+        <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
+        <script src="{% static 'datatable/jquery/jquery.min.js'%}"></script>
+        <script type="text/javascript" src="{% static 'datatable/data_tables/datatables.min.js' %}"></script>        
+        
+        <!-- Sweetalert -->
+        <script src="{% static 'js/sweetalert2@11.js' %}"></script>
+
+        <script src="{% static 'js/img-preview.js' %}"></script>
+
+        <script src="{% static 'js/crud-functions.js' %}"></script>
+        
+        <script>            
+            $(document).ready(function() {
+                $('#myTable').DataTable( {
+                    dom: 'Bfrtip',
+                    buttons: [
+                        'colvis'
+                    ],
+                    
+                } );
+            } );
+
+            {% if messages %}
+                {% for m in messages %}
+            Swal.fire({
+                  icon: 'success',
+                  title: 'Éxito',
+                  text: '{{ m }}',
+                })
+                {% endfor %}
+            {% endif %}
+        </script>
+    </body>
+</html>

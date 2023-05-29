@@ -1,0 +1,127 @@
+{% extends 'baseA.html' %}
+{% load static%}
+{% block content %}
+
+<section class="container my-5 w-100 w-md-75">
+  <h2 class="fw-bold">Quejas y sugerencias</h2>
+  <div class="card py-3">
+    <div class="card-body">
+      <table id="table_id" class="display table table-striped">
+        <thead class="table-light">
+          <tr>
+            <th>A nombre de:</th>
+            <th>Habitacion</th>
+            <th>Queja o sugerencia</th>
+            <td>Respuesta</td>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for csdata in reclamaciones %}
+          <tr>
+            <td>{{csdata.name}}</td>
+            <td>{{csdata.roomNumber}}</td>
+            <td>{{csdata.info}}</td>
+            <td>{{csdata.response}}</td>
+            <td>
+              <div class="d-flex gap-4">
+                {% if request.user.category == '1' %}
+                <button
+                  data-bs-toggle="modal"
+                  data-bs-target="#exampleModal"
+                  class="btn btn-primary w-25"
+                >
+                  <i class="fa-solid fa-eye"></i>
+                </button>
+                {% if csdata.response != '' %}
+                <a
+                  href="{% url 'editResponseCSuggestion' csdata.id %}"
+                  class="btn btn-danger w-75"
+                  >Editar Respuesta
+                  <i class="fa-solid fa-pencil"></i>
+                </a>
+                {% else %}
+                <a
+                  href="{% url 'askcsuggestion' csdata.id %}"
+                  class="btn btn-success w-75"
+                  >Responder
+                  <i class="fa-solid fa-pencil"></i>
+                </a>
+                {% endif %} {% else %}
+                <a
+                  href="{% url 'deleteCSuggestion' csdata.id %}"
+                  class="btn btn-primary w-50"
+                  >Eliminar
+                  <i class="fa-solid fa-trash"></i>
+                </a>
+                {% if csdata.response != '' %}
+                <a href="#" class="btn btn-secondary w-25">
+                  <i class="fa-solid fa-eye"></i>
+                </a>
+                {% else %}
+                <a
+                  href="{% url 'editCSuggestion' csdata.id %}"
+                  class="btn btn-danger w-50"
+                  >Editar
+                  <i class="fa-solid fa-pencil"></i>
+                </a>
+                {% endif %} {% endif %}
+              </div>
+            </td>
+          </tr>
+
+          <!-- Modal -->
+          <div
+            class="modal fade"
+            id="exampleModal"
+            tabindex="-1"
+            aria-labelledby="exampleModalLabel"
+            aria-hidden="true"
+          >
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">
+                    {{csdata.name}}
+                  </h5>
+                  <button
+                    type="button"
+                    class="btn-close"
+                    data-bs-dismiss="modal"
+                    aria-label="Close"
+                  ></button>
+                </div>
+                <div class="modal-body">
+                  <div>
+                    <h6 class="fw-bold">Info</h6>
+                    <p class="">{{csdata.info}}</p>
+                  </div>
+                  <div>
+                    <h6 class="fw-bold">Respuesta</h6>
+                    <p class="p-2 border rounded">
+                      {{csdata.response}}
+                    </p>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button
+                    type="button"
+                    class="btn btn-secondary"
+                    data-bs-dismiss="modal"
+                  >
+                    Close
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+
+
+{% endblock %}
