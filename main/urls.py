@@ -14,13 +14,12 @@ urlpatterns = [
     path('reservation/edit/<int:reservationId>',
          views.editReservation, name='editReservation'),
     
-    path('csuggestion/new', views.createCSuggestion, name='newCSuggestion'),
+    
     path('csuggestion/edit/<int:csuggestionId>',
          views.editCSuggestion, name='editCSuggestion'),
     path('csuggestion/delete/<int:csuggestionId>/',
          views.deleteCSuggestion, name="deleteCSuggestion"),
-    path('csuggestion/response/<int:csuggestionId>/',
-         views.askCSuggestion, name='askcsuggestion'),
+    
     path('csuggestion/response/edit/<int:csuggestionId>/',
          views.editReponseCSuggestion, name='editResponseCSuggestion'),
     

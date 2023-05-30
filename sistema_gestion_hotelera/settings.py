@@ -41,7 +41,7 @@ DJANGO_APPS = [
 
 PROJECTS_APPS = [
     'main',
-    'administracion',
+    'administracion.apps.AdministracionConfig',
     'recepcion',
 ]
 
@@ -135,3 +135,5 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
+
+AUTH_USER_MODEL = 'administracion.User'

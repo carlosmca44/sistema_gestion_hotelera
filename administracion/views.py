@@ -61,7 +61,7 @@ def deleteUser(request, userId):
 
 
 def editUser(request, userId):
-    user = UserProfile.objects.get(id=userId)
+    user = User.objects.get(id=userId)
     password = user.password
     if request.method == 'POST':
         form = userCreationForm(request.POST, instance=user)
@@ -73,3 +73,19 @@ def editUser(request, userId):
 
     context = {'form': form, 'password': password}
     return render(request, 'usuarios/edit_user.html', context)
+
+
+@login_required
+def askCSuggestion(request, csuggestionId):
+    csuggestion = Reclamacion.objects.get(id=csuggestionId)
+    info = csuggestion.info
+    if request.method == 'POST':
+        form = AskCSuggestions(request.POST, instance=csuggestion)
+        if form.is_valid():
+            form.save()
+            return redirect('reclamaciones')
+    else:
+        form = AskCSuggestions()
+
+    context = {'form': form, 'info': info}
+    return render(request, 'reclamaciones/csuggestion_response.html', context)

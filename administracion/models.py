@@ -1,44 +1,22 @@
 from django.db import models
-from django.contrib.auth.models import BaseUserManager, AbstractBaseUser
+from django.contrib.auth.models import AbstractUser
+from django.conf import settings
 
 
-class MyUserManager(BaseUserManager):
-    def create_user(self, username, password=None):
-        if not username:
-            raise ValueError('Username is required')
-        user = self.model(username=username)
-        user.set_password(password)
-        user.save(using=self._db)
-        return user
-
-    def create_superuser(self, username, password):
-        user = self.create_user(username, password)
-        user.is_staff = True
-        user.is_superuser = True
-        user.save(using=self._db)
-        return user
-
-
-class UserProfile(AbstractBaseUser):
-    username = models.CharField(unique=True, max_length=50)
+class UserProfile(models.Model):
     first_name = models.CharField(max_length=50, null=True)
     last_name = models.CharField(max_length=50, null=True)
+    username = models.OneToOneField(
+        settings.AUTH_USER_MODEL, on_delete=models.CASCADE, max_length=20)
     password = models.CharField(max_length=15, null=True)
-    category = models.CharField(max_length=20, default='cliente')
-
-    objects = MyUserManager()
-
-    USERNAME_FIELD = 'username'
-    REQUIRED_FIELDS = ['first_name']
+    category = models.CharField(max_length=20)
 
     def __str__(self):
-        return self.username
+        return self.username.__str__()
 
-    def has_perm(self, perm, obj=None):
-        return True
 
-    def has_module_perms(self, app_label):
-        return True
+class User(AbstractUser):
+    category = models.CharField(max_length=20)
 
 class Habitacion(models.Model):
     roomNumber = models.IntegerField()

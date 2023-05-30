@@ -1,10 +1,15 @@
-{% extends 'baseA.html' %}
+{% extends 'baseR.html' %}
 {% load static%}
-{% block content %}
+{% block contentR %}
 
 <section class="container my-5 w-100 w-md-75">
   <div class="d-flex justify-content-between my-3">
     <h2 class="fw-bold">Quejas y sugerencias</h2>
+    <a
+        href="{% url 'newCSuggestion' %}"
+        class="text-decoration-none btn btn-primary {% if request.user.category == 'Administrador' %} d-none {% endif %}"
+        >Nueva queja o sugerencia</a
+      >
   </div>
   <div class="card py-3">
     <div class="card-body">
@@ -27,7 +32,7 @@
             <td>{{csdata.response}}</td>
             <td>
               <div class="d-flex gap-4">
-                
+                {% if request.user.category == '1' %}
                 <button
                   data-bs-toggle="modal"
                   data-bs-target="#exampleModal"
@@ -49,7 +54,25 @@
                   >Responder
                   <i class="fa-solid fa-pencil"></i>
                 </a>
-                {% endif %} 
+                {% endif %} {% else %}
+                <a
+                  href="{% url 'deleteCSuggestion' csdata.id %}"
+                  class="btn btn-primary w-50"
+                  >Eliminar
+                  <i class="fa-solid fa-trash"></i>
+                </a>
+                {% if csdata.response != '' %}
+                <a href="#" class="btn btn-secondary w-25">
+                  <i class="fa-solid fa-eye"></i>
+                </a>
+                {% else %}
+                <a
+                  href="{% url 'editCSuggestion' csdata.id %}"
+                  class="btn btn-danger w-50"
+                  >Editar
+                  <i class="fa-solid fa-pencil"></i>
+                </a>
+                {% endif %} {% endif %}
               </div>
             </td>
           </tr>

@@ -5,7 +5,7 @@ from django.contrib.auth.forms import UserCreationForm
 
 class userCreationForm(UserCreationForm):
 
-    CATEGORIES = [('Administrador', 'Administrador'), ('Recepcionista', 'Recepcionista')]
+    CATEGORIES = [('Administrador', 'Administrador'), ('Recepcionista', 'Recepcionista'), ('Cliente', 'Cliente')]
 
     password1 = forms.CharField(
         label='Contraseña', widget=forms.PasswordInput(attrs={'class': 'form-control'}))
@@ -15,7 +15,7 @@ class userCreationForm(UserCreationForm):
         label='Rol', widget=forms.Select(attrs={'class': 'form-select'}), choices=CATEGORIES)
 
     class Meta:
-        model = UserProfile
+        model = User
         fields = ['first_name', 'last_name', 'username',
                   'password1', 'password2', 'category']
         help_texts = {k: '' for k in fields}
@@ -28,3 +28,24 @@ class userCreationForm(UserCreationForm):
         }
 
 
+class CSuggestionsForm(forms.ModelForm):
+    class Meta:
+        model = Reclamacion
+        fields = ['habitacion', 'info']
+        labels = {
+            'habitacion': 'Habitacion', 'info': 'Informacion'
+        }
+        widgets = {
+            'habitacion': forms.Select(attrs={'class': 'form-select'}),
+            'info': forms.Textarea(attrs={'class': 'form-control'}),
+        }
+
+
+class AskCSuggestions(forms.ModelForm):
+    class Meta:
+        model = Reclamacion
+        fields = ['response']
+        labels = {
+            'response': 'Respuesta'
+        }
+        widgets = {'response': forms.Textarea(attrs={'class': 'form-control'})}

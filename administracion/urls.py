@@ -4,7 +4,10 @@ from .views import *
 urlpatterns = [
     path('', indexA, name='indexA'),
     path('reservations/', reservations, name='reservations'),
+
+    # Reclamaciones
     path('csuggestion/', complaintSuggestion, name='reclamaciones'),
+    path('csuggestion/response/<int:csuggestionId>/', askCSuggestion, name='askcsuggestion'),
 
     # Usuarios
     path('users-management/', usersManagement, name='usuarios'),
